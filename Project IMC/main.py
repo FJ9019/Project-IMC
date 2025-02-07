@@ -1,9 +1,13 @@
 import json
+
+ROOT_PROJECT = 'PROJECT PYTHON\Project IMC'
+
+
 def load_data(name):
-    with open(name, 'r') as f:
+    with open(f'{ROOT_PROJECT}{name}', 'r') as f:
         return json.load(f)
     def save_data(name, objet):
-        with open(name, 'w') as f:
+        with open(f'{ROOT_PROJECT}{name}', 'w') as f:
             json.dump(objet, f)
 
 def main():
