@@ -21,6 +21,21 @@ def get_users_datas(id_, users, datas):
 def imc_calculator(taille, poids):
     return round(poids/taille**2, 2)
 
+def get_health_class(imc):
+    class_health = None
+    if 18.5<= imc <= 24.9:
+        class_health =0
+    elif imc<18.5:
+        class_health =1
+    elif 25<= imc <= 30:
+        class_health = 2
+    elif 30<=imc<=35:
+        class_health = 3
+    elif 35<=imc<=40:
+        class_health =4
+    else:
+        class_health = 5
+    return class_health                          
     
 def main():
     print("Bonjour M. Comment allez vous\n Veuillez vous connecté ! \n1)Connexion\n2)Creer un compte")
@@ -47,7 +62,11 @@ def main():
             data['data']['taille'] = int(input('Taille (cm)'))/100
             data['data']['poids'] = int(input('Poids (kg)'))
             
-            data['data']['imc']=imc_calculator(data['data']['taille'], data['data']['poids'])
+            imc = imc_calculator(data['data']['taille'], data['data']['poids'])
+            
+            data['data']['imc'] = imc
+            
+            data['data']['class_health'] = get_health_class(imc)
             
             datas[user_data_index] = data
             users[user_index] = user
@@ -62,7 +81,11 @@ def main():
           print(data['data']['imc'])
           pass
         elif action==3:
-          pass
+            healths = load_data('health.json')
+            user, data, user_index, user_data_index = get_users_datas(user_id, users, datas)
+            user_health = [health for health in healths if health['id']==data['data']['class_health']][0]
+            print(f"Etat : {user_health['maladie']}\nAnalyse : {user_health['reason']}\nConseil : {user_health['conseil']}")
+            pass
         else:
             print("Valeur non reconnue")
     
