@@ -47,9 +47,19 @@ def main():
             data['data']['taille'] = int(input('Taille (cm)'))/100
             data['data']['poids'] = int(input('Poids (kg)'))
             
+            data['data']['imc']=imc_calculator(data['data']['taille'], data['data']['poids'])
+            
+            datas[user_data_index] = data
+            users[user_index] = user
+            
+            save_data('datas.json', datas)
+            save_data('users.json', users)
+            
             pass
         
         if option==2:
+          user, data, user_index, user_data_index = get_users_datas(user_id, users, datas)
+          print(data['data']['imc'])
           pass
         elif action==3:
           pass
