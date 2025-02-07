@@ -90,6 +90,36 @@ def main():
             print("Valeur non reconnue")
     
     if option == 2:
+        users = load_data('users.json')
+        datas = load_data('datas.json')
+        
+               
+        user = {}
+        data = {'data':{}}
+        
+        user['id'] = users[-1]['id']+1
+        user['nom'] = input('Nom')
+        user['prenom'] = input('Prenom')
+        user['age'] = input('Age')
+        user['sexe'] = input('Sexe')
+        user['travail'] = input('Travail')
+        
+        data['data']['taille'] = int(input('Taille (cm)'))/100
+        data['data']['poids'] = int(input('Poids (kg)'))
+        
+        imc = imc_calculator(data['data']['taille'], data['data']['poids'])
+        
+        data['user_id'] = user['id']
+        data['data']['imc'] = imc
+        
+        data['data']['class_health'] = get_health_class(imc)
+        
+        users.append(user)
+        datas.append(data)
+        
+        save_data('users.json', users)
+        save_data('datas.json', datas)
+        
         pass
         
 main()
