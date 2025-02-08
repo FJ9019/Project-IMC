@@ -1,12 +1,12 @@
 import json
 
-ROOT_PROJECT = 'Project Python/Project IMC'
+# ROOT_PROJECT = 'Project Python/Project IMC'
 
 def load_data(name):
-    with open(f'{ROOT_PROJECT}/{name}', 'r') as f:
+    with open('name', 'r') as f:
         return json.load(f)
     def save_data(name, objet):
-        with open(f'{ROOT_PROJECT}/{name}', 'w') as f:
+        with open('name', 'w') as f:
             json.dump(objet, f)
 
 def get_users_datas(id_, users, datas):
@@ -20,6 +20,10 @@ def get_users_datas(id_, users, datas):
 
 def imc_calculator(taille, poids):
     return round(poids/taille**2, 2)
+
+def default_input(name, default):
+    val = input(name)
+    return val if val else default
 
 def get_health_class(imc):
     class_health = None
@@ -53,14 +57,14 @@ def main():
         if action == 1:
             user, data, user_index, user_data_index = get_users_datas(user_id, users, datas)
             
-            user['nom'] = input('Nom')
-            user['prenom'] = input('Prenom')
-            user['age'] = input('Age')
-            user['sexe'] = input('Sexe')
-            user['travail'] = input('Travail')
+            user['nom'] = default_input('Nom', user['nom'])
+            user['prenom'] = default_input('Prenom', user['prenom'])
+            user['age'] = default_input('Age', user['age'])
+            user['sex'] = default_input('Sexe', user['sex'])
+            user['travail'] = default_input('Travail', user['travail'])
             
-            data['data']['taille'] = int(input('Taille (cm)'))/100
-            data['data']['poids'] = int(input('Poids (kg)'))
+            data['data']['taille'] = int(default_input('Taille (cm)', data['data']['taille']))/100
+            data['data']['poids'] = int(default_input('Poids (kg)', data['data']['poids']))
             
             imc = imc_calculator(data['data']['taille'], data['data']['poids'])
             
@@ -71,7 +75,7 @@ def main():
             datas[user_data_index] = data
             users[user_index] = user
             
-            save_data('datas.json', datas)
+            save_data('datas.json', datas) 
             save_data('users.json', users)
             
             pass
@@ -96,12 +100,19 @@ def main():
                
         user = {}
         data = {'data':{}}
+        user_id = None
+        try:
+            user_id = users[-1]['id']+1
+            pass
+        except IndexError:
+            user_id = 1
+            pass
         
         user['id'] = users[-1]['id']+1
         user['nom'] = input('Nom')
         user['prenom'] = input('Prenom')
         user['age'] = input('Age')
-        user['sexe'] = input('Sexe')
+        user['sex'] = input('Sexe')
         user['travail'] = input('Travail')
         
         data['data']['taille'] = int(input('Taille (cm)'))/100
@@ -117,9 +128,8 @@ def main():
         users.append(user)
         datas.append(data)
         
-        save_data('users.json', users)
+        save_data('users.json', users) 
         save_data('datas.json', datas)
-        
         pass
         
 main()
