@@ -109,7 +109,7 @@ def main():
             pass
 
         user['id'] = user_id
-        user['nom'] = input('Nom :')
+        user['nom'] = default_input('Nom :', f"Utilisateur{user_id}")
         user['prenom'] = input('Prenom :')
         user['age'] = input('Age :')
         user['sex'] = input('Sexe :')
