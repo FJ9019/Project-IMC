@@ -57,14 +57,14 @@ def main():
         if action == 1:
             user, data, user_index, user_data_index = get_users_datas(user_id, users, datas)
 
-            user['nom'] = default_input('Nom', user['nom'])
-            user['prenom'] = default_input('Prenom', user['prenom'])
-            user['age'] = default_input('Age', user['age'])
-            user['sex'] = default_input('Sexe', user['sex'])
-            user['travail'] = default_input('Travail', user['travail'])
+            user['nom'] = default_input('Nom :', user['nom'])
+            user['prenom'] = default_input('Prenom :', user['prenom'])
+            user['age'] = default_input('Age :', user['age'])
+            user['sex'] = default_input('Sexe :', user['sex'])
+            user['travail'] = default_input('Travail :', user['travail'])
 
-            data['data']['taille'] = int(default_input('Taille (cm)',  data['data']['taille']))/100
-            data['data']['poids'] = int(default_input('Poids (kg)',  data['data']['poids']))
+            data['data']['taille'] = int(default_input('Taille (cm) :',  data['data']['taille']))/100
+            data['data']['poids'] = int(default_input('Poids (kg) :',  data['data']['poids']))
 
             imc = imc_calculator(data['data']['taille'], data['data']['poids'])
 
@@ -109,14 +109,14 @@ def main():
             pass
 
         user['id'] = user_id
-        user['nom'] = input('Nom')
-        user['prenom'] = input('Prenom')
-        user['age'] = input('Age')
-        user['sex'] = input('Sexe')
-        user['travail'] = input('Travail')
+        user['nom'] = input('Nom :')
+        user['prenom'] = input('Prenom :')
+        user['age'] = input('Age :')
+        user['sex'] = input('Sexe :')
+        user['travail'] = input('Travail :')
 
-        data['data']['taille'] = int(input('Taille (cm)'))/100
-        data['data']['poids'] = int(input('Poids (kg)'))
+        data['data']['taille'] = int(input('Taille (cm) :'))/100
+        data['data']['poids'] = int(input('Poids (kg) :'))
 
         imc = imc_calculator(data['data']['taille'], data['data']['poids'])
 
